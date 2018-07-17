@@ -1,41 +1,45 @@
+var dataString = $("#jsondata").html();
+console.log(dataString);
+dataString = dataString.replace(/'/g, '"');
+
+var json_data = jQuery.parseJSON(dataString);
+
 // global variables
 var cart = []
 
 // displays all items through loo[]
-function displayItems(response){
+function displayItems(){
   //intialize output and length vars
   let output = '';
-  let length = response.length;
+  let length = json_data.length;
 
   // loop through response
   for(var i=0; i<length; i++){
+
     output += `<div class="col-md-3 col-sm-3 product">
       <div class="row">
-        <img src="http://placehold.it/200x200" alt="${response[i].name}">
+        <img src="http://placehold.it/200x200" alt="${json_data[i].name}">
       </div>
       <div class="row">
-        <h4 class="prod_name">${response[i].name}</h4>
+        <h4 class="prod_name">${json_data[i].name}</h4>
       </div>
       <div class="row">
-        <h5 class="amount">$${response[i].price.toFixed(2)}</h5>
+        <h5 class="amount">$${json_data[i].price.toFixed(2)}</h5>
       </div>
       <div class="row">
-        <button class="btn btn-primary" onclick="addToCart(${response[i].id})">Add to Cart</button>
+        <button class="btn btn-primary" onclick="addToCart(${json_data[i].id})">Add to Cart</button>
       </div>
     </div>`;
   }
-
   // add output to prod_section
   $('#prod_section').html(output);
 }
-
-// gets products from json file
-$.getJSON('../../assets/products.json', displayItems);
+$(document).ready(displayItems);
 
 // add to cart
 function addToCart(id){
-  $.getJSON('./assets/products.json', function(response){
-    $.each(response, function(index, product){
+  $.getJSON('./assets/products.json', function(json_data){
+    $.each(json_data, function(index, product){
       if(product.id == id){
         cart.push(product);
         displayTotal();

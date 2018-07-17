@@ -3,8 +3,8 @@ from flask import render_template, jsonify, request # needed to render html file
 import requests
 
 @app.route('/')
-@app.route('/index', methods = ['POST'])
+@app.route('/index/', methods = ['POST'])
 def index():
-    url = 'https://jamieylee.github.io/productJSON/'
+    url = "https://raw.githubusercontent.com/JamieYLee/ShopWithFlask/master/app/assets/products.json"
     value = requests.get(url).json()
     return render_template('index.html', value=value)
