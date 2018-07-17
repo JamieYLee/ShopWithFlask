@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Shopping Cart - {{ super() }}{% endblock %}
+
+{% block app_content %}
+<div class="row">
+  <div class="col-md-9" id="prod_section">
+    <!--column for showing products-->
+    <!--end of product-->
+  </div> <!--end of col-md-10-->
+  <div class="col-md-3" id="cart_section">
+    <!--column for showing shopping cart-->
+    <table id="cart">
+    </table>
+  </div> <!--end of col-md-2-->
+</div> <!--end of row-->
+{% endblock %}
