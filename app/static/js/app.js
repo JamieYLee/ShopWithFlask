@@ -1,8 +1,13 @@
-var dataString = $("#jsondata").html();
-console.log(dataString);
-dataString = dataString.replace(/'/g, '"');
+function getData(){
+  var dataString = $("#items").attr("content");
+  console.log(dataString);
+  let my_data = dataString.replace(/'/g, '"');
 
-var json_data = jQuery.parseJSON(dataString);
+  var json_data = JSON.parse(my_data);
+
+  // console.log(json_data);
+  return json_data;
+}
 
 // global variables
 var cart = []
@@ -11,6 +16,7 @@ var cart = []
 function displayItems(){
   //intialize output and length vars
   let output = '';
+  let json_data = getData();
   let length = json_data.length;
 
   // loop through response
@@ -38,14 +44,13 @@ $(document).ready(displayItems);
 
 // add to cart
 function addToCart(id){
-  $.getJSON('./assets/products.json', function(json_data){
-    $.each(json_data, function(index, product){
-      if(product.id == id){
-        cart.push(product);
-        displayTotal();
-        displayCart();
-      }
-    })
+  let response = getData();
+  $.each(response, function(index, product){
+    if(product.id == id){
+      cart.push(product);
+      displayTotal();
+      displayCart();
+    }
   });
 }
 

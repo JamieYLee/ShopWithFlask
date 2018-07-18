@@ -2,6 +2,12 @@
 
 {% block title %}Shopping Cart - {{ super() }}{% endblock %}
 
+{% block metas %}
+
+<meta id="items" content="{{value}}">
+
+{% endblock %}
+
 {% block app_content %}
 <div class="row">
   <div class="col-md-9" id="prod_section">
